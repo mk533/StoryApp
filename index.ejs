@@ -1,0 +1,52 @@
+<html>
+
+<head>
+
+
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div clas="container">
+
+        <form name="signupform" action="/SignUp" method="post">
+
+            Username:
+            <input type="text" name="username" id="username"> Password:
+            <input type="password" name="password" id="password">
+            <button class="btn btn-primary" type="submit">Sign Up</button>
+
+        </form>
+
+
+
+        <form name="signinform" action="/SignIn" method="post">
+            Username:
+            <input type="text" name="username" id="username"> Password:
+            <input type="password" name="password" id="password">
+            <button type="submit" class="btn btn-primary">Sign In</button>
+
+        </form>
+
+
+        <% for(var i=0; i<events.length; i++) {%>
+
+            <div class="row-fluid">
+
+                <div class="">
+                    <%- link_to(events[i].event_title, 'events/'+events[i].event_id) %>
+
+
+                        <%= events[i].event_content%>
+                </div>
+
+            </div>
+
+            <%}%>
+
+    </div>
+
+</body>
+
+</html>

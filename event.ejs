@@ -1,0 +1,90 @@
+<html>
+
+
+
+
+<body>
+
+
+
+    <% if(obj[0]===undefined){ %>
+        <h1>wrong id</h1>
+        <% } 
+    else{ %>
+
+            <h1>  Event by: <%=obj[0].created_by%></h1>
+
+            <h3><%=obj[0].event_title%></h3>
+            <p>
+                <%= obj[0].event_content%>
+            </p>Flag value is:
+            <%=obj1[0].flag%>
+                <p>
+                </p>
+                <% if(obj1[0].flag==true){ %>
+                    <form name="Edit" action="/events/<%=obj[0].event_id%>" method="put">
+                        title:
+                        <input type="text" name="edit_event_title" id="edit_event_title" value="<%=obj[0].event_title%>">
+                        <br>
+                        <br> content:
+                        <input type="text" name="edit_event_content" id="edit_event_content" value="<%= obj[0].event_content%>">
+                        <input type="submit" value="Edit" id="Edit">
+                    </form>
+
+                    <hr>
+                    <% } 
+                     else{%>
+
+
+                        <% if(obj[0].event_price!=0){ %>
+                            <p>
+                                Early Bird Price :
+                                <%=obj[0].early_bird_perc%> (for 1st 10 users only)
+                            </p>
+                            <%} %>
+                                <p>
+                                    Event Price:
+                                    <%=obj[0].event_price%>
+                                </p>
+
+
+
+
+
+                                <form name="orderTicket" action="order/<%=obj[0].event_id%>" method="post">
+                                    <input type="submit" value="Buy Ticket">
+                                </form>
+                                <p>Attendance:
+                                    <%=obj1[0].number%>
+                                </p>
+                                <hr>
+                                <%}%>
+
+                                    <form name="commentsection" action="/events/<%=obj[0].event_id%>" method="post">
+                                        new comment:
+                                        <input type="text" name="new_comment" id="new_comment">
+                                        <input type="submit" value="comment">
+                                    </form>
+                                    <ul>
+
+                                        <% for(var i=0; i< obj.length; i++) {%>
+
+
+
+                                            <li>
+                                                <%= obj[i].username%>:
+                                                    <%= obj[i].comment%>
+                                            </li>
+
+                                            <%}%>
+                                    </ul>
+
+                                    <%}%>
+
+
+
+</body>
+
+
+
+</html>
