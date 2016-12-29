@@ -17,13 +17,13 @@
             <h3><%=obj[0].event_title%></h3>
             <p>
                 <%= obj[0].event_content%>
-            </p>Flag value is:
+            </p>Flag is:
             <%=obj1[0].flag%>
                 <p>
                 </p>
                 <% if(obj1[0].flag==true){ %>
-                    <form name="Edit" action="/events/<%=obj[0].event_id%>" method="put">
-                        title:
+                    <form name="Edit" method="POST" action="/edited" enctype="application/x-www-form-urlencoded">
+                        <input type="hidden" name="_method" value="PUT"> title:
                         <input type="text" name="edit_event_title" id="edit_event_title" value="<%=obj[0].event_title%>">
                         <br>
                         <br> content:

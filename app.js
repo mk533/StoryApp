@@ -17,6 +17,26 @@ app.use(cookieParser());
 app.use(session({
     secret: 'stories'
 }));
+var i;
+var methodOverride = require('method-override');
+app.use(methodOverride(function (req, res) {
+    console.log("in override method");
+    // console.log(i);
+    if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+        values = [req.body.edit_event_title,
+                  req.body.edit_event_content,
+                  i];
+        connection.query('UPDATE events SET event_title=?,event_content=? where event_id=?', values, function (err, results) {
+            if (err) {
+                throw err;
+            } else {
+                console.log(results);
+                // res.redirect('events/' + i);
+            }
+        });
+
+    }
+}));
 require('./passport')(app);
 
 var storyRouter = express.Router();
@@ -216,8 +236,9 @@ storyRouter.route('/events/order/:id')
         });
     });
 storyRouter.route('/events/:id')
-    .get(function (req, res) {
 
+.get(function (req, res) {
+        i = req.params.id;
         // console.log("In events with id  " + req.params.id);
         values = [
              req.params.id,
@@ -233,10 +254,10 @@ storyRouter.route('/events/:id')
                     obj1[0].flag = (results[0][0].created_by == req.user.username);
                     // console.log(obj1[0].flag);
                     //console.log(req.user.username);
-                    console.log(results[0]);
-                    console.log(results[1]);
+                    // console.log(results[0]);
+                    //console.log(results[1]);
                     results[1][0].flag = (obj1[0].flag);
-                    console.log(results[1]);
+                    //console.log(results[1]);
                     res.render('event', {
                             obj: results[0],
                             obj1: results[1]
@@ -260,8 +281,6 @@ storyRouter.route('/events/:id')
         connection.query('insert into comments SET ?', values, function (err, results) {
             if (err) {
                 throw err;
-
-
             } else {
                 res.redirect('/events/' + req.params.id);
             }
@@ -302,7 +321,10 @@ storyRouter.route('/profile')
             title: (req.user.username),
         });
     });
-
+storyRouter.route('/edited')
+    .post(function (req, res) {
+        res.redirect('/');
+    });
 
 app.listen(port, function () {
     console.log("Server running on port:" + port);
