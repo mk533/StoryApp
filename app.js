@@ -250,6 +250,7 @@ storyRouter.route('/events/:id')
                 if (err) {
                     throw err;
                 } else {
+                    obj[0].user = req.user.username;
                     // console.log(results[0][0].event_title);
                     obj1[0].flag = (results[0][0].created_by == req.user.username);
                     // console.log(obj1[0].flag);
@@ -257,6 +258,7 @@ storyRouter.route('/events/:id')
                     // console.log(results[0]);
                     //console.log(results[1]);
                     results[1][0].flag = (obj1[0].flag);
+                    results[0][0].user = (obj[0].user);
                     //console.log(results[1]);
                     res.render('event', {
                             obj: results[0],

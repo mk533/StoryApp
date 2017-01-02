@@ -1,18 +1,41 @@
 <html>
 
+<head>
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+</head>
+
 <body>
-    <h1> <%= title%>   </h1>
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <a class="brand" href='/profile'>Story App</a>
+            <ul class="nav pull-right">
+                <li>
+                    <h3>    <a href="/profile">
+                        <%= title%>
+                    </a></h3>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
-    <p>Create New event:</p>
-    <form name="event_create" action="/events" method="post">
-        Event title
-        <input type="text" name="event_title" id="event_title"> About Event:
-        <input type="text" name="event_content" id="event_content"> Event Price:
-        <input type="text" name="event_price" id="event_price"> Early Bird %:
-        <input type="text" name="early_bird_prec" id="early_bird_prec">
-        <input type="submit" value="submit">
-    </form>
+    <div class="container-fluid">
 
+        <h3>Create New event:</h3>
+        <form name="event_create" action="/events" method="post">
+            Event title :
+            <textarea rows="4" cols="20" name="event_title" id="event_title" required></textarea>
+            About Event:
+            <textarea rows="4" cols="20" type="text" name="event_content" id="event_content" required></textarea>
+            <br>
+            <br> Event Price:
+            <input type="text" name="event_price" id="event_price" required> Early Bird Price:
+            <input type="text" name="early_bird_prec" id="early_bird_prec" required>
+            <br>
+            <br>
+            <button class="btn btn-primary" type="submit" value="submit" style="align:center;">Submit</button>
+        </form>
+    </div>
 </body>
 
 </html>

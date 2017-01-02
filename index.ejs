@@ -1,50 +1,123 @@
 <html>
 
+
 <head>
 
 
     <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="http://getbootstrap.com/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body>
 
-    <div clas="container">
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <a class="brand" href='/'>Story App</a>
+            <ul class="nav pull-right">
+                <li> <a data-toggle="modal" data-target="#my">Log In</a></li>
+                <li><a data-toggle="modal" data-target="#myModal">SignUp</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="modal fade" id="my" role="dialog">
+        <div class="modal-dialog">
 
-        <form name="signupform" action="/SignUp" method="post">
-
-            Username:
-            <input type="text" name="username" id="username"> Password:
-            <input type="password" name="password" id="password">
-            <button class="btn btn-primary" type="submit">Sign Up</button>
-
-        </form>
-
-
-
-        <form name="signinform" action="/SignIn" method="post">
-            Username:
-            <input type="text" name="username" id="username"> Password:
-            <input type="password" name="password" id="password">
-            <button type="submit" class="btn btn-primary">Sign In</button>
-
-        </form>
-
-
-        <% for(var i=0; i<events.length; i++) {%>
-
-            <div class="row-fluid">
-
-                <div class="">
-                    <%- link_to(events[i].event_title, 'events/'+events[i].event_id) %>
-
-
-                        <%= events[i].event_content%>
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Log In</h4>
                 </div>
+                <div class="modal-body">
+                    <form name="signinform" action="/SignIn" method="post">
+                        Username:
+                        <input type="text" name="username" id="username">
+                        <br> Password:
+                        <input type="password" name="password" id="password">
+                        <br>
+                        <button type="submit" class="btn btn-primary">Sign In</button>
+                    </form>
 
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
             </div>
 
-            <%}%>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
 
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Sign Up</h4>
+                </div>
+                <div class="modal-body">
+                    <form name="signinform" action="/SignIn" method="post">
+                        Email ID:
+                        <input type="text" name="username" id="username">
+                        <br> Password:
+                        <input type="password" name="password" id="password">
+                        <br>
+                        <button type="submit" class="btn btn-primary">Sign Up</button>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <!--
+    <form name="signupform" action="/SignUp" method="post">
+
+        Username:
+        <input type="text" name="username" id="username"> Password:
+        <input type="password" name="password" id="password">
+        <button class="btn btn-primary" type="submit">Sign Up</button>
+
+    </form>
+
+
+
+    <form name="signinform" action="/SignIn" method="post">
+        Username:
+        <input type="text" name="username" id="username"> Password:
+        <input type="password" name="password" id="password">
+        <button type="submit" class="btn btn-primary">Sign In</button> 
+
+    </form>
+-->
+    <div clas="container">
+        <div class="row-fluid ">
+            <% for(var i=0; i<events.length; i++) {%>
+                <div class="col-xs-6 col-sm-3">
+                    <div class="thumbnail well ">
+                        <div style="max-height: 60px; overflow: hidden;">
+                            <h4>  <%- link_to(events[i].event_title, 'events/'+events[i].event_id) %></h4>
+
+                            <p>
+                                <%= events[i].event_content%>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <%}%>
+        </div>
     </div>
 
 </body>
